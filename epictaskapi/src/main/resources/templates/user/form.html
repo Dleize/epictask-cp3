@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{~/css/style.css}">
+    <link rel="stylesheet" th:href="@{~/css/range.css}">
+    <title>Epic Task</title>
+</head>
+<body>
+    <h1>Epic Task</h1>
+    
+    <main class="cards">
+        <div class="card lg">
+            <h2>Cadastrar Usuário</h2>
+            <form class="vertical-form" action="/user" method="POST" th:object="${user}">
+                <input type="hidden" th:field="*{id}" id="id">
+                <label class="hide" for="title">Nome</label>
+                <input 
+                    placeholder="nome" 
+                    type="text" 
+                    id="name" 
+                    th:field="*{name}"
+                    th:classappend="${#fields.hasErrors('name')}?invalid"
+                >
+                <span th:errors="*{name}"></span>
+                
+                
+                <label class="hide" for="description">Email</label>
+                <input 
+                    class="user-input"
+                    placeholder="Email do usuário" 
+                    type="email"
+                    th:field="*{email}"
+                    id="email"
+                    th:classappend="${#fields.hasErrors('email')}?invalid"
+                ></input>
+                <span th:errors="*{email}"></span>
+
+                <label class="hide" for="description">Senha</label>
+                <input 
+                    class="user-input"
+                    placeholder="Senha do usuário" 
+                    type="password"
+                    th:field="*{password}"
+                    id="password"
+                    th:classappend="${#fields.hasErrors('password')}?invalid"
+                ></input>
+                <span th:errors="*{password}"></span>
+                
+                <div class="buttons">
+                    <a href="/user" class="button cancel">cancelar</a>
+                    <input class="button" type="submit" value="cadastrar">
+                </div>
+            </form>
+        </div>
+    </main>
+    </body>
+    <script th:src="@{~/js/script.js}"></script>
+</html>

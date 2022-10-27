@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head th:replace="_template :: head"></head>
+<body>
+<header th:replace="_template :: header"></header>
+<nav th:replace="_template :: menu('pendentes')"></nav>
+
+
+    <div class="toolbar">
+        <a class="button" href="/task/new" sec:authorize-url="POST /task" >cadastrar tarefa</a>
+    </div>
+
+    <div class="alert success" th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <main class="cards">
+        <div class="card animated" th:each="task : ${tasks}">
+            <h2 th:text="${task.title}"></h2>
+            <div class="status">
+                <svg>
+                    <circle cx="70" cy="70" r="70" />
+                    <circle cx="70" cy="70" r="70" th:style="${'stroke-dashoffset: ' + (440 - (440 * task.status) / 100) }" />
+                </svg>
+                <div class="number">
+                    <h2 th:text="${task.status + '%'}"></h2>
+                </div>
+            </div>
+            <div class="score">
+                <span class="material-icons">star</span>
+                <span th:text="${task.score + 'pts'}"></span>
+            </div>
+            <div class="actions">
+                <a th:href="${'/task/delete/' + task.id}" sec:authorize="hasRole('ADMIN')">
+                    <span class="material-icons">delete</span>
+                </a>
+                <a th:href="${'/task/' + task.id}">
+                    <span class="material-icons">edit</span>
+                </a>                
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>

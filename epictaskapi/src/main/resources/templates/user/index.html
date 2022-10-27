@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head th:replace="_template :: head"></head>
+<body>
+    <header th:replace="_template :: header"></header>
+    <nav th:replace="_template :: menu('usuarios')"></nav>
+
+    <div class="toolbar">
+        <a class="button" href="/user/new" sec:authorize-url="POST /user" >cadastrar usuário</a>
+    </div>
+
+    <div class="alert success" th:if="${message != null}">
+        <span th:text="${message}"></span>
+    </div>
+
+    <main class="cards">
+        <div class="card animated" th:each="user : ${users}">
+            <h2 th:text="${user.id}"></h2>
+            <div class="status">
+                    <h2 th:text="${user.name}"></h2>
+                    <h2 th:text="${user.email}"></h2>
+            <div class="actions">
+                <a th:href="${'/user/delete/' + user.id}" sec:authorize="hasRole('ADMIN')">
+                    <span class="material-icons">delete</span>
+                </a>
+                <a th:href="${'/user/' + user.id}">
+                    <span class="material-icons">edit</span>
+                </a>                
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
