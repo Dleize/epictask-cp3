@@ -43,7 +43,7 @@ public class UserWebController {
     @PostMapping
     public String create(@Valid User user, BindingResult result, RedirectAttributes redirect){
         if( result.hasErrors() ) return "user/form";
-        String message = (user.getId()==null)?"Tarefa cadastrada com sucesso":"Usuário atualizado com sucesso";
+        String message = (user.getId()==null)?"Usuário cadastrado com sucesso":"Usuário atualizado com sucesso";
         service.save(user);
         redirect.addFlashAttribute("message", message);
         return "redirect:/user";

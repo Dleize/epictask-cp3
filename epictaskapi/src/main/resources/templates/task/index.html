@@ -31,10 +31,13 @@
                 <span th:text="${task.score + 'pts'}"></span>
             </div>
             <div class="actions">
+                <a th:href="${'/task/confirm/' + task.id}">
+                    <span class="material-icons">done</span>
+                </a>
                 <a th:href="${'/task/delete/' + task.id}" sec:authorize="hasRole('ADMIN')">
                     <span class="material-icons">delete</span>
                 </a>
-                <a th:href="${'/task/' + task.id}">
+                <a th:href="${'/task/' + task.id}" sec:authorize="hasRole('ADMIN')">
                     <span class="material-icons">edit</span>
                 </a>                
             </div>

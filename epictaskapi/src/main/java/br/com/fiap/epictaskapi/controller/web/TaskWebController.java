@@ -62,7 +62,12 @@ public class TaskWebController {
     public ModelAndView edit(@PathVariable Long id, Task task){
         task = service.getById(id).get();
         return new ModelAndView("task/form").addObject("task", task);
+    }
 
+    @GetMapping("confirm/{id}")
+    public ModelAndView concluir(@PathVariable Long id, Task task){
+        task = service.getById(id).get();
+        return new ModelAndView("task/confirm").addObject("task", task);
     }
     
 }

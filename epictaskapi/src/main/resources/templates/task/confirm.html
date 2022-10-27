@@ -13,8 +13,8 @@
     
     <main class="cards">
         <div class="card lg">
-            <h2>Cadastrar Tarefa</h2>
-            <form class="vertical-form" action="/task" method="POST" th:object="${task}">
+            <h2>Concluir Tarefa?</h2>
+            <form class="vertical-form" action="/task/confirm" method="POST" th:object="${task}">
                 <input type="hidden" th:field="*{id}" id="id">
                 <label class="hide" for="title">título</label>
                 <input 
@@ -45,10 +45,19 @@
                     th:field="*{score}" 
                     id="score"
                 >
-                
+                <label class="hide" for="title">título</label>
+                <input 
+                    placeholder="título" 
+                    type="text" 
+                    id="status" 
+                    th:field="*{status}"
+                    th:classappend="${#fields.hasErrors('title')}?invalid"
+                    value="100"
+                >
+                <span th:errors="*{status}"></span>
                 <div class="buttons">
                     <a href="/task" class="button cancel">cancelar</a>
-                    <input class="button" type="submit" value="cadastrar">
+                    <input class="button" type="submit" value="Concluir">
                 </div>
             </form>
         </div>
