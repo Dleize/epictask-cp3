@@ -45,6 +45,14 @@ public class DatabaseSeed implements CommandLineRunner {
                 .password(passwordEncoder.encode("123")) 
                 .withRole(new Role("ROLE_ADMIN"))
         );
+        
+        userRepository.save(
+            new User()
+                .name("Admin")
+                .email("admin@fiap.com.br")
+                .password(passwordEncoder.encode("administrador")) 
+                .withRole(new Role("ROLE_ADMIN"))
+        );
 
         taskRepository.saveAll(List.of(
             new Task("Modelar BD", "modelar tabelas do banco", 150, 100),
